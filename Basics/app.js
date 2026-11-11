@@ -18,10 +18,10 @@ const app = express()
 //     res.redirect("/about")
 // })
 
-// const middleWare = (req,res,next)=>{
-//     console.log("middleware executed")
-//     next()
-// }
+const middleWare = (req,res,next)=>{
+    console.log("middleware executed")
+    next()
+}
 
 
 // app.get("/",middleWare,(req,res)=>{
@@ -39,23 +39,24 @@ const app = express()
 //     res.send("home page")
 // })
 
-app.use((req,res,next)=>{
-    console.log("middleware executed")  
-    next()
-})
 
-app.get("/",(req,res)=>{
+app.get("/",middleWare,(req,res)=>{
     setTimeout(()=>{
     res.send("home page")
     },2000)
 })
 
-app.get("/about",(req,res)=>{
+app.get("/about",middleWare,(req,res)=>{
     setTimeout(()=>{
         res.send("about page")
     },2000)
-    res.send("loading....")
+    console.log("loading....")
 })
+
+app.get("/contact",(req,res)=>{
+    res.send("contact page")
+})
+
 app.listen(3000,()=>{
     console.log(`server starting:`,3000);   
 })
