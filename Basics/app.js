@@ -14,6 +14,10 @@ app.get("/about",(req,res)=>{
     res.send("about")
 })
 
+app.get("/home",(req,res)=>{
+    res.redirect("/about")
+})
+
 app.listen(3000,()=>{
     console.log(`server starting:`,3000);   
 })
