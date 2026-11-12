@@ -18,10 +18,7 @@ const app = express()
 //     res.redirect("/about")
 // })
 
-const middleWare = (req,res,next)=>{
-    console.log("middleware executed")
-    next()
-}
+
 
 
 // app.get("/",middleWare,(req,res)=>{
@@ -40,18 +37,7 @@ const middleWare = (req,res,next)=>{
 // })
 
 
-app.get("/",middleWare,(req,res)=>{
-    setTimeout(()=>{
-    res.send("home page")
-    },2000)
-})
 
-app.get("/about",middleWare,(req,res)=>{
-    setTimeout(()=>{
-        res.send("about page")
-    },2000)
-    console.log("loading....")
-})
 
 
 // app.post("/contact",(req,res)=>{
@@ -66,19 +52,46 @@ app.get("/about",middleWare,(req,res)=>{
 //     res.send(req.params.id)
 // })
 
-app.get("/search",(req,res)=>{
-    const name = req.query.name
-    const age = req.query.age
-    res.json({
-        name,age
-    })
+// app.get("/search",(req,res)=>{
+//     const name = req.query.name
+//     const age = req.query.age
+//     res.json({
+//         name,age
+//     })
+// })
+
+// const middleWare = (req,res,next)=>{
+//     console.log("middleware executed")
+//     next()
+// }
+
+// app.get("/",middleWare,(req,res)=>{
+//     setTimeout(()=>{
+//     res.send("home page")
+//     },2000)
+// })
+
+// app.get("/about",middleWare,(req,res)=>{
+//     setTimeout(()=>{
+//         res.send("about page")
+//     },2000)
+//     console.log("loading....")
+// })
+
+// app.get("/contact",(req,res)=>{
+//     res.send("contact page")
+// })
+
+// app.use(express.static("public"))
+
+app.get("/student",(req,res,next)=>{
+    const error = new Error("student not found")
+    next(error)
 })
 
-
-app.get("/contact",(req,res)=>{
-    res.send("contact page")
+app.use((err,req,res,next)=>{
+    res.static(500).send(err.message)
 })
-
 
 app.listen(3000,()=>{
     console.log(`server starting:`,3000);   
