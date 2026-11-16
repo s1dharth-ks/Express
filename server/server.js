@@ -6,7 +6,11 @@ dotenv.config()
 
 const PORT = process.env.PORT
 const username = process.env.NAME
-console.log(username);
+import userRoute from "./routers/userRoute.js"
+// console.log(username);
+
+
+server.use("/user",userRoute)
 
 server.listen(PORT,()=>{
     console.log(`server is starting: ${PORT}`);
