@@ -8,12 +8,13 @@ const PORT = process.env.PORT
 const username = process.env.NAME
 import userRoute from "./routers/userRoute.js"
 // console.log(username);
+connection()
+server.use(express.json())
+console.log("xdhgf");
 
-
-server.use("/user",userRoute)
+server.use('/user',userRoute)
 
 server.listen(PORT,()=>{
     console.log(`server is starting: ${PORT}`);
 })
 
-connection()
