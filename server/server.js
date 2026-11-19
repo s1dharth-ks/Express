@@ -13,6 +13,7 @@ server.use(express.json())
 console.log("xdhgf");
 
 server.use('/user',userRoute)
+ser
 
 server.listen(PORT,()=>{
     console.log(`server is starting: ${PORT}`);
