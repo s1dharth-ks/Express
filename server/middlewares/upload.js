@@ -2,19 +2,19 @@ import multer from "multer"
 
 const storage = multer.diskStorage({
     destination:(req,file,cb)=>{
-        cb(null,"./uploads")
+        cb(null,"./upload")
     },
     filename:(req,file,cb)=>{
         let name = file.originalname.replace(/\s\s+/g,' ')
         name = name.replace(/[&\/\\#, +()$~%'":=*?<>{}@-]/g,'_')
-        cb(null,DataTransfer.now()+ "_"+ name)
+        cb(null,Date.now()+ "_"+ name)
     }
 })
 
 const fileFilterConfig = (req,file,cb)=>{
     if(
         file.mimetype === "image/png" ||
-        file.mimetype === "image/jpg" ||
+        file.mimetype === "image/jpeg" ||
         file.mimetype === "image/jpg" 
     ) {
         cb(null,true)
@@ -26,7 +26,7 @@ const fileFilterConfig = (req,file,cb)=>{
 const upload = multer({
     storage:storage,
     limits: {
-        filSize: 1024 * 1024 * 10
+        fileSize: 1024 * 1024 * 10
     },
     fileFilter: fileFilterConfig
 

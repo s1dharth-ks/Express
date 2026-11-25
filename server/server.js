@@ -7,13 +7,15 @@ dotenv.config()
 const PORT = process.env.PORT
 const username = process.env.NAME
 import userRoute from "./routers/userRoute.js"
+import productRoute from "./routers/productRoute.js"
 // console.log(username);
 connection()
 server.use(express.json())
-console.log("xdhgf");
+// console.log("xdhgf");
 
 server.use('/user',userRoute)
-ser
+server.use('/product',productRoute)
+
 
 server.listen(PORT,()=>{
     console.log(`server is starting: ${PORT}`);
