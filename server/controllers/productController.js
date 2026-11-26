@@ -27,20 +27,32 @@ export const addProduct = async(req,res)=>{
     }
 }
 
-// export const getProduct = async(req,res)=>{
-//     try{
-//         const products = await product.find()
-
-//         res.status(200).json({
-//             status:true,
-//             message:"successfull",
-//             data:products
-//         })
-//     }catch(err){
-//         console.log(err);
+export const getOneProduct = async(req,res)=>{
+    try{
+        const {id} = req.body
+        console.log(id);
+        if(!id){
+            console.log("id is required");
+        }
         
-//     }
-// }
+        const pro = await product.findById(id)
+        console.log(pro);
+        
+
+        if(!pro){
+            console.log("product is not found");
+        }else{
+            res.status(200).json({
+                status:true,
+                message:"successfull",
+                data:pro
+            })
+        }
+    }catch(err){
+        console.log(err);
+        
+    }
+}
 
 export const listProduct = async(req,res)=>{
     try{
@@ -104,5 +116,31 @@ export const updateProduct = async(req,res)=>{
         })
     }catch(err){
         console.log(err);
+    }
+}
+
+export const deleteProduct = async(req,res)=>{
+    try{
+        const {id} = req.body
+        if(!id){
+            console.log("id in required");
+            
+        }
+
+        const deletedProduct = await product.findByIdAndDelete(id)
+        
+        if(!deleteProduct){
+            console.log("product is not found");
+        }else{
+            res.status(200).json({
+                status : true,
+                message : "successfull",
+                data: deletedProduct 
+            })
+        }
+
+    }catch(err){
+        console.log(err);
+        
     }
 }
