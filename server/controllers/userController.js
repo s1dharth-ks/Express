@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken"
 
 export const Register = async (req, res) => {
     try {
-        const { name, email, password, phone } = req.body
+        const { name, email, password, phone, role } = req.body
 
         if (!email) {
             console.log("email id required");
@@ -17,7 +17,7 @@ export const Register = async (req, res) => {
         const saltRound = 10
         const salt = bcrypt.genSaltSync(saltRound)
         const hash = bcrypt.hashSync(password, salt)
-        const newUser = new user({ name, email, password: hash, phone })
+        const newUser = new user({ name, email, password: hash, phone, role })
         const savedUser = await newUser.save()
         res.status(200).json({
             status: true,
@@ -68,7 +68,8 @@ export const login = async (req,res)=>{
         }else{
         const token = jwt.sign({
             userId:User._id,
-            userEmail:User.email
+            userEmail:User.email,
+            userRole:User.role
         },
         process.env.Jwtsecret,
         {expiresIn:"30d"}

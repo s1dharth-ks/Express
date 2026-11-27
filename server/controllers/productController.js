@@ -5,6 +5,12 @@ import { fileURLToPath } from "url";
 
 export const addProduct = async(req,res)=>{
     try{
+        if(req.userDetails.userRole != "admin"){
+            res.status(403).json({
+                status: false,
+                message: "Access Denied....."
+            })
+        }
         const {name,description,price,image} = req.body
         if(!name){
             console.log("name is required");

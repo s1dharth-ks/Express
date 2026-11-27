@@ -18,12 +18,12 @@ export const authCheck =async(req,res,next)=>{
                 if(!validUser){
                     console.log("Invalid credentials!...");
                 }else{
-                    req.userDetails = { userId : decodedToken.userId, userEmail: decodedToken.userEmail}
+                    req.userDetails = { userId : decodedToken.userId, userEmail: decodedToken.userEmail, userRole: decodedToken.userRole}
                     next()
                 }
             }
         }catch(err){
-            console.log("authentication failed");
+            console.log("authentication failed......",err);
         }
     }
 }
